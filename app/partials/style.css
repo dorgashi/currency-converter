@@ -1,0 +1,28 @@
+.mid_content {
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.pull_left {
+	float:left;
+}
+
+.pull_right {
+	float:right;
+}
+
+.convertion_source, .convertion_average {
+	font-weight:700;
+}
+
+.convertion_result {
+	width:20%;
+	margin-top:15px;
+}
+
+.result_row, .result_average {
+	border: 1px solid #909090;
+	padding: 8px;
+	margin: 10px 0 10px 0;
+	height:58px;
+}

@@ -1,0 +1,32 @@
+<div class="mid_content">
+	<form>
+		<select ng-model="selectedCurrency" ng-options="item.name for item in list track by item.code" ng-change="convertCurrency(selectedCurrency.code)">
+			<option value="" ng-hide="selectedCurrency != 0">Select a currency</option>
+			<option value="{{item.code}}">{{item.name}} ({{item.code}})</option>
+		</select>
+		<button class="convertion_refresh" ng-click="refresh()" ng-disabled="!current.code || loading">Refresh</button>
+		<div class="last_update" ng-show="lastUpdate.when && !loading">Last updated: {{lastUpdate.when}} (executed in {{lastUpdate.time}} sec.)</div>
+    </form>
+
+    <div class="convertion_result" ng-hide="loading || !current">
+
+    	<div class="result_average">
+
+    		<div class="convertion_average">AVERAGE</div>
+    		<span class="pull_left">1 BTC</span><span class="pull_right">{{current.average}} {{current.code}}</span>
+
+    	</div>
+
+	    <div ng-repeat="item in current.all" class="result_row">
+            
+	    	<div class="convertion_source">{{item.source}}</div>
+	        <span class="pull_left">1 BTC</span><span class="pull_right">{{item.value}} {{current.code}}</span>
+
+	    </div>
+
+    </div>
+
+    <div ng-show="loading">
+	    	...
+	</div>
+</div>

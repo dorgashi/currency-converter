@@ -1,0 +1,13 @@
+{
+  "name": "angular-test",
+  "version": "0.0.0",
+  "authors": [
+    "Dorant Gashi <gashidorant@gmail.com>"
+  ],
+  "main": "app/app.js",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular-material": "~0.6.0"
+  }
+}
