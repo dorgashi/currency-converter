@@ -27,9 +27,11 @@ var home = angular.module('homeModule', [])
 
 			var total = 0;
 
+			var array = [];
+
 			for ( key in selected ) {
 
-                $scope.current.all.push(
+                array.push(
                 	{
                 	    value: selected[key].rates.last,
                 	    source: key
@@ -39,6 +41,8 @@ var home = angular.module('homeModule', [])
                 total += selected[key].rates.last;
 
 			}
+
+			$scope.current.all = array;
 
 			$scope.current.average = (total/Object.keys(selected).length).toFixed(2);
 
@@ -69,9 +73,11 @@ var home = angular.module('homeModule', [])
 
 			    var selected = data[arg];
 
+			    var array = [];
+
 				for ( key in selected ) {
 
-	                $scope.current.all.push(
+	                array.push(
 	                	{
 	                	    value: selected[key].rates.last,
 	                	    source: key
@@ -81,6 +87,12 @@ var home = angular.module('homeModule', [])
 	                total += selected[key].rates.last;
 
 				}
+
+				array.sort(function(a, b) {
+					return a.value + b.value;
+				});
+
+				$scope.current.all = array;
 
 				$scope.current.average = (total/Object.keys(selected).length).toFixed(2);
 
@@ -103,21 +115,18 @@ var home = angular.module('homeModule', [])
         
         var time = date.getTime();
         var d = new Date().getTime() - time;
-         
+
         if ( d < 60000 ) {
-        	return 'Less than a minute ago';
+            return 'Less than a minute ago';
         }
-        else if ( d >= 60000 && d < 120000 ) {
-        	return 'About a minute ago';
+        if ( d < 3600000 ) {
+        	return 'About ' + Math.ceil(d/1000/60) + ' minute(s) ago';
         }
-        else if ( d >= 120000 && d < 180000 ) {
-        	return 'About 2 minutes ago';
+        else if ( d >= 3600000 && d < 86400000 ) {
+        	return 'About ' + Math.round(d/1000/3600) + ' hour(s) ago';
         }
-        else if ( d >= 180000 && d < 240000 ) {
-        	return 'About 3 minutes ago';
-        }
-        else if ( d >= 240000 && d < 280000 ) {
-        	return 'About 4 minutes ago';
+        else if ( d >= 86400000 ) {
+        	return 'About ' + Math.round(d/1000/3600/24) + ' day(s) ago';
         }
 
 	}
